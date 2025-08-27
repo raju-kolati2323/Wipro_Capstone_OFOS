@@ -42,33 +42,33 @@ const RefundAndDisputes = () => {
   };
 
   const handleSave = async (id) => {
-    try {
-      const refundToUpdate = refunds.find((refund) => refund.id === id);
-      const previousStatus = refundToUpdate.status;
-
-      const updatedRefund = { ...refundToUpdate, status: editedStatus };
-
-      const response = await axios.put(`http://localhost:5000/refunds/${id}`, updatedRefund);
-
-      if (response.status === 200) {
-        setRefunds((prevRefunds) =>
-          prevRefunds.map((refund) =>
-            refund.id === id ? updatedRefund : refund
-          )
-        );
-
-        alert(`Status updated from "${previousStatus}" to "${editedStatus}"`);
-
-        setEditingId(null);
-        setEditedStatus('');
-      } else {
-        alert("Failed to update status.")
-      }
-    } catch (error) {
-      console.error('Error updating refund status:', error);
-      alert('Failed to update status.');
+  try {
+    const refundToUpdate = refunds.find((refund) => refund.id === id);
+    if (!refundToUpdate) {
+      alert('Refund not found!');
+      return;
     }
-  };
+
+    const updatedRefund = { ...refundToUpdate, status: editedStatus };
+
+    await axios.put(`http://localhost:5000/refunds/${id}`, updatedRefund);
+
+    alert('Status updated successfully!');
+
+    setRefunds((prevRefunds) =>
+      prevRefunds.map((refund) =>
+        refund.id === id ? updatedRefund : refund
+      )
+    );
+
+    setEditingId(null);
+    setEditedStatus('');
+  } catch (error) {
+    console.error('PUT error:', error);
+    alert('Something went wrong while updating the status!');
+  }
+};
+
 
   const renderRefunds = () => (
     <div className="mt-4" align="center">

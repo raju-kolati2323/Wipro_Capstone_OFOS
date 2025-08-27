@@ -9,43 +9,43 @@ import Reports from "./components/admin/Reports";
 import RefundAndDisputes from "./components/admin/RefundAndDisputes";
 
 const App = () => {
-  const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
-  const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwtToken'));
+  // const [userRole, setUserRole] = useState(localStorage.getItem('userRole'));
+  // const [isLoggedIn, setIsLoggedIn] = useState(!!localStorage.getItem('jwtToken'));
 
-  const handleLoginSuccess = (role) => {
-    setUserRole(role);
-    setIsLoggedIn(true);
-  };
+  // const handleLoginSuccess = (role) => {
+  //   setUserRole(role);
+  //   setIsLoggedIn(true);
+  // };
 
-  const handleLogout = () => {
-    localStorage.removeItem('jwtToken');
-    localStorage.removeItem('userRole');
-    setUserRole(null);
-    setIsLoggedIn(false);
-  };
+  // const handleLogout = () => {
+  //   localStorage.removeItem('jwtToken');
+  //   localStorage.removeItem('userRole');
+  //   setUserRole(null);
+  //   setIsLoggedIn(false);
+  // };
 
-  const renderNavbar = () => {
-    if (!isLoggedIn) {
-      return <PublicNavbar />;
-    }
-    switch (userRole) {
-      case 'Admin':
-        return <AdminNavbar onLogout={handleLogout} />;
-      case 'Restaurant Owner':
-        return <RestaurantOwnerNavbar onLogout={handleLogout} />;
-      case 'Customer':
-        return <CustomerNavbar onLogout={handleLogout} />;
-      default:
-        return <PublicNavbar />;
-    }
-  };
+  // const renderNavbar = () => {
+  //   if (!isLoggedIn) {
+  //     return <PublicNavbar />;
+  //   }
+  //   switch (userRole) {
+  //     case 'Admin':
+  //       return <AdminNavbar onLogout={handleLogout} />;
+  //     case 'Restaurant Owner':
+  //       return <RestaurantOwnerNavbar onLogout={handleLogout} />;
+  //     case 'Customer':
+  //       return <CustomerNavbar onLogout={handleLogout} />;
+  //     default:
+  //       return <PublicNavbar />;
+  //   }
+  // };
 
   return (
       <div className="flex flex-col min-h-screen">
-        {renderNavbar()}
-        <main className="flex-grow">
+        {/* {renderNavbar()}
+        <main className="flex-grow"> */}
           <Routes>
-            <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
+            {/* <Route path="/login" element={<Login onLoginSuccess={handleLoginSuccess} />} />
             <Route path="/register" element={<Registration />} />
             
             {isLoggedIn ? (
@@ -65,19 +65,19 @@ const App = () => {
                     <Route path="/owner/profile" element={<div>Restaurant Owner Profile</div>} />
                   </>
                 )}
-                {userRole === 'Admin' && (
+                {userRole === 'Admin' && ( */}
                   <>
                     <Route path="/admin/dashboard" element={<AdminDashboard />} />
                     <Route path="/admin/reports" element={<Reports />} />
                     <Route path="/admin/refund" element={<RefundAndDisputes />} />
                   </>
-                )}
+                {/* )}
               </>
             ) : (
               <Route path="*" element={<Login onLoginSuccess={handleLoginSuccess} />} />
-            )}
+            )} */}
           </Routes>
-        </main>
+        {/* </main> */}
         <Footer />
       </div>
   );
